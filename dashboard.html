@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - InvoiceKit</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h1>Welcome to InvoiceKit Dashboard</h1>
+
+<button onclick="logout()">Logout</button>
+
+<script>
+function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
