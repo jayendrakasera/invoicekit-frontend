@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoices - InvoiceKit</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Create Invoice</h2>
+
+    <select id="clientSelect"></select>
+
+    <input type="date" id="issueDate">
+    <input type="date" id="dueDate">
+    <input type="text" id="notes" placeholder="Notes">
+
+    <h3>Invoice Items</h3>
+
+    <div id="itemsContainer"></div>
+
+    <button onclick="addItemField()">Add Item</button>
+    <button onclick="createInvoice()">Create Invoice</button>
+
+    <h3>Invoice List</h3>
+    <div id="invoiceList"></div>
+
+    <br>
+    <a href="dashboard.html">Back to Dashboard</a>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/invoice.js"></script>
+
+</body>
+</html>
