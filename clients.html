@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clients - InvoiceKit</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Client Management</h2>
+
+    <input type="text" id="name" placeholder="Client Name">
+    <input type="email" id="email" placeholder="Client Email">
+    <input type="text" id="phone" placeholder="Phone">
+    <input type="text" id="address" placeholder="Address">
+    <input type="text" id="gstNumber" placeholder="GST Number">
+
+    <button onclick="addClient()">Add Client</button>
+
+    <h3>Client List</h3>
+    <div id="clientList"></div>
+
+    <br>
+    <a href="dashboard.html">Back to Dashboard</a>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/client.js"></script>
+
+</body>
+</html>

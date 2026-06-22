@@ -16,3 +16,10 @@ input, button {
     margin: 10px 0;
     padding: 10px;
 }
+
+.client-card {
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+    margin: 10px 0;
+}
