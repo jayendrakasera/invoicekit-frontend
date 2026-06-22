@@ -106,14 +106,73 @@ async function loadInvoices() {
 
     invoices.forEach(invoice => {
         invoiceList.innerHTML += `
-            <div class="invoice-card">
-                <p><strong>${invoice.invoiceNumber}</strong></p>
-                <p>Status: ${invoice.status}</p>
-                <p>Total: ₹${invoice.totalAmount}</p>
-            </div>
-            <hr>
-        `;
+    <div class="invoice-card">
+        <p><strong>${invoice.invoiceNumber}</strong></p>
+        <p>Status: ${invoice.status}</p>
+        <p>Total: ₹${invoice.totalAmount}</p>
+
+        <button onclick="downloadPdf(${invoice.id})">
+            Download PDF
+        </button>
+
+        <button onclick="sendInvoiceEmail(${invoice.id})">
+            Send Email
+        </button>
+
+        <button onclick="markAsPaid(${invoice.id})">
+            Mark Paid
+        </button>
+    </div>
+    <hr>
+`;
     });
+}
+
+async function downloadPdf(id) {
+    const response = await fetch(`${BASE_URL}/invoices/${id}/pdf`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    const blob = await response.blob();
+
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "invoice.pdf";
+    a.click();
+}
+
+async function sendInvoiceEmail(id) {
+    const response = await fetch(`${BASE_URL}/email/send/${id}`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    if (response.ok) {
+        alert("Invoice email sent successfully");
+    }
+}
+
+async function markAsPaid(id) {
+    const response = await fetch(
+        `${BASE_URL}/invoices/${id}/status?status=PAID`,
+        {
+            method: "PUT",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
+
+    if (response.ok) {
+        alert("Invoice marked as PAID");
+        loadInvoices();
+    }
 }
 
 window.onload = function () {
