@@ -163,9 +163,7 @@ if (invoices.length === 0) {
                     Send Email
                 </button>
 
-                <button class="small-btn" onclick="markPaid(${invoice.id})">
-                    Mark Paid
-                </button>
+                <button class="small-btn" onclick="markAsPaid(${invoice.id})">Mark Paid</button>
             </div>
             <hr>
         `;
