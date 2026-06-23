@@ -23,7 +23,7 @@
     <div class="main-content">
 
         <h1>Invoice Management</h1>
-
+        <div class="toolbar">
         <!-- Search + Filters -->
         <input type="text" id="search" placeholder="Search invoices">
         <button onclick="searchInvoices()">Search</button>
@@ -50,6 +50,8 @@
 
         <br><br>
 
+        </div>
+
         <!-- Create Invoice Form -->
         <div class="invoice-card">
 
@@ -57,8 +59,11 @@
 
             <select id="clientSelect"></select>
 
-            <input type="date" id="issueDate">
-            <input type="date" id="dueDate">
+            <label for="issueDate">Issue Date</label>
+            <input type="date" id="issueDate" >
+
+            <label for="dueDate">Due Date</label>
+            <input type="date" id="dueDate" >
             <input type="text" id="notes" placeholder="Notes">
 
             <h3>Invoice Items</h3>

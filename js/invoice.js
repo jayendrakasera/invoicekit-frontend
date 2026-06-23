@@ -115,11 +115,24 @@ function renderInvoices(invoices) {
     const invoiceList = document.getElementById("invoiceList");
     invoiceList.innerHTML = "";
 
+if (invoices.length === 0) {
+    document.getElementById("invoiceList").innerHTML =
+        "<p>No invoices found.</p>";
+    return;
+}
+
     invoices.forEach(invoice => {
         invoiceList.innerHTML += `
             <div class="invoice-card">
                 <p><strong>${invoice.invoiceNumber}</strong></p>
-                <p>Status: ${invoice.status}</p>
+
+                <p>
+                    Status: 
+                    <span class="status-badge status-${invoice.status.toLowerCase()}">
+                        ${invoice.status}
+                    </span>
+                </p>
+
                 <p>Total: ₹${invoice.totalAmount}</p>
             </div>
             <hr>

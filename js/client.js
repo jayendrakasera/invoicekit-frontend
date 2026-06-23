@@ -36,6 +36,12 @@ function renderClients(clients) {
 
     clientList.innerHTML = "";
 
+    if (clients.length === 0) {
+    document.getElementById("clientList").innerHTML =
+        "<p>No clients found.</p>";
+    return;
+}
+
     clients.forEach(client => {
         clientList.innerHTML += `
             <div>
