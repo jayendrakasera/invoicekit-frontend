@@ -5,7 +5,12 @@ async function register() {
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
         companyName: document.getElementById("companyName").value,
-        gstNumber: document.getElementById("gstNumber").value
+        gstNumber: document.getElementById("gstNumber").value,
+        bankName: document.getElementById("bankName").value,
+        accountNumber: document.getElementById("accountNumber").value,
+        ifscCode: document.getElementById("ifscCode").value,
+        accountHolderName: document.getElementById("accountHolderName").value,
+        upiId: document.getElementById("upiId").value
     };
 
     const response = await fetch(`${BASE_URL}/auth/register`, {
