@@ -1,3 +1,6 @@
+let invoicePage = 0;
+const invoicePageSize = 5;
+
 const token = localStorage.getItem("token");
 
 console.log("invoice.js loaded");
@@ -125,15 +128,18 @@ function renderInvoices(invoices) {
 }
 
 async function loadInvoices() {
-    const response = await fetch(`${BASE_URL}/invoices`, {
-        headers: {
-            "Authorization": `Bearer ${token}`
+    const response = await fetch(
+        `${BASE_URL}/invoices/paginated?page=${invoicePage}&size=${invoicePageSize}`,
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
         }
-    });
+    );
 
-    const invoices = await response.json();
+    const data = await response.json();
 
-    renderInvoices(invoices);   
+    renderInvoices(data.content); 
 
 //     const invoices = await response.json();
 
@@ -296,6 +302,18 @@ async function sortByDate() {
     const invoices = await response.json();
 
     renderInvoices(invoices);
+}
+
+function nextInvoicePage() {
+    invoicePage++;
+    loadInvoices();
+}
+
+function prevInvoicePage() {
+    if (invoicePage > 0) {
+        invoicePage--;
+        loadInvoices();
+    }
 }
 
 window.onload = function () {

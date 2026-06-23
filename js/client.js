@@ -1,3 +1,6 @@
+let clientPage = 0;
+const pageSize = 5;
+
 const token = localStorage.getItem("token");
 
 console.log("client.js loaded");
@@ -47,15 +50,18 @@ function renderClients(clients) {
 }
 
 async function loadClients() {
-    const response = await fetch(`${BASE_URL}/clients`, {
-        method: "GET",
-        headers: {
-            "Authorization": `Bearer ${token}`
+    const response = await fetch(
+        `${BASE_URL}/clients/paginated?page=${clientPage}&size=${pageSize}`,
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
         }
-    });
+    );
 
-    const clients = await response.json();
-    renderClients(clients);
+    const data = await response.json();
+
+    renderClients(data.content);
 
     // const clientList = document.getElementById("clientList");
     // clientList.innerHTML = "";
@@ -102,6 +108,18 @@ async function searchClients() {
     const clients = await response.json();
 
     renderClients(clients);
+}
+
+function nextClientPage() {
+    clientPage++;
+    loadClients();
+}
+
+function prevClientPage() {
+    if (clientPage > 0) {
+        clientPage--;
+        loadClients();
+    }
 }
 
 window.onload = loadClients;
