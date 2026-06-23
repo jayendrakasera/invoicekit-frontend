@@ -11,6 +11,24 @@
 <input type="text" id="search" placeholder="Search invoices">
 <button onclick="searchInvoices()">Search</button>
 
+<select id="statusFilter" onchange="filterByStatus()">
+    <option value="">Filter Status</option>
+    <option value="PAID">PAID</option>
+    <option value="PENDING">PENDING</option>
+</select>
+
+<select id="amountSort" onchange="sortByAmount()">
+    <option value="">Sort Amount</option>
+    <option value="asc">Low to High</option>
+    <option value="desc">High to Low</option>
+</select>
+
+<select id="dateSort" onchange="sortByDate()">
+    <option value="">Sort Date</option>
+    <option value="asc">Oldest First</option>
+    <option value="desc">Newest First</option>
+</select>
+
     <h2>Create Invoice</h2>
 
     <select id="clientSelect"></select>

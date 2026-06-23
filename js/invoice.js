@@ -232,6 +232,72 @@ async function searchInvoices() {
     renderInvoices(filteredInvoices);
 }
 
+async function filterByStatus() {
+    const status = document.getElementById("statusFilter").value;
+
+    const response = await fetch(
+        `${BASE_URL}/invoices/filter/status?status=${status}`,
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
+
+   if (!response.ok) {
+    console.error("Request failed:", response.status);
+    return;
+}
+
+const invoices = await response.json();
+
+    renderInvoices(invoices);
+}
+
+async function sortByAmount() {
+    const order = document.getElementById("amountSort").value;
+
+    const response = await fetch(
+        `${BASE_URL}/invoices/sort/amount?order=${order}`,
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
+
+if (!response.ok) {
+    console.error("Request failed:", response.status);
+    return;
+}
+
+const invoices = await response.json();
+
+    renderInvoices(invoices);
+}
+
+async function sortByDate() {
+    const order = document.getElementById("dateSort").value;
+
+    const response = await fetch(
+        `${BASE_URL}/invoices/sort/date?order=${order}`,
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
+
+    if (!response.ok) {
+        console.error("Request failed:", response.status);
+        return;
+    }
+
+    const invoices = await response.json();
+
+    renderInvoices(invoices);
+}
+
 window.onload = function () {
     loadClients();
     loadInvoices();
