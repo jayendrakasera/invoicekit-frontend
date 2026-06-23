@@ -1,3 +1,7 @@
+if (!localStorage.getItem("token")) {
+    window.location.href = "index.html";
+}
+
 let clientPage = 0;
 const pageSize = 5;
 

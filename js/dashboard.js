@@ -1,3 +1,7 @@
+if (!localStorage.getItem("token")) {
+    window.location.href = "index.html";
+}
+
 const token = localStorage.getItem("token");
 
 async function loadDashboardStats() {

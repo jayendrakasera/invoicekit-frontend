@@ -21,9 +21,14 @@ async function register() {
         body: JSON.stringify(data)
     });
 
-    const result = await response.json();
+    if (!response.ok) {
+    alert("Registration failed");
+    return;
+}
 
-    localStorage.setItem("token", result.token);
+const token = await response.text();
+
+localStorage.setItem("token", token);
 
     alert("Registration successful");
     window.location.href = "dashboard.html";
@@ -43,9 +48,14 @@ async function login() {
         body: JSON.stringify(data)
     });
 
-    const result = await response.json();
+    if (!response.ok) {
+        alert("Invalid email or password");
+        return;
+    }
 
-    localStorage.setItem("token", result.token);
+    const token = await response.text();
+
+    localStorage.setItem("token", token);
 
     alert("Login successful");
     window.location.href = "dashboard.html";

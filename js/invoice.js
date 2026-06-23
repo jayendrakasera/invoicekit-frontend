@@ -1,3 +1,7 @@
+if (!localStorage.getItem("token")) {
+    window.location.href = "index.html";
+}
+
 let invoicePage = 0;
 const invoicePageSize = 5;
 
