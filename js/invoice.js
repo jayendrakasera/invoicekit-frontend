@@ -134,6 +134,18 @@ if (invoices.length === 0) {
                 </p>
 
                 <p>Total: ₹${invoice.totalAmount}</p>
+
+                <button class="small-btn" onclick="downloadPdf(${invoice.id})">
+                    Download PDF
+                </button>
+
+                <button class="small-btn" onclick="sendEmail(${invoice.id})">
+                    Send Email
+                </button>
+
+                <button class="small-btn" onclick="markPaid(${invoice.id})">
+                    Mark Paid
+                </button>
             </div>
             <hr>
         `;
