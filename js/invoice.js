@@ -92,6 +92,38 @@ if (!selectedClient) {
     }
 }
 
+// function renderInvoices(invoices) {
+//     const invoiceList = document.getElementById("invoiceList");
+//     invoiceList.innerHTML = "";
+
+//     invoices.forEach(invoice => {
+//         invoiceList.innerHTML += `
+//             <div class="invoice-card">
+//                 <p><strong>${invoice.invoiceNumber}</strong></p>
+//                 <p>Status: ${invoice.status}</p>
+//                 <p>Total: ₹${invoice.totalAmount}</p>
+//             </div>
+//             <hr>
+//         `;
+//     });
+// }
+
+function renderInvoices(invoices) {
+    const invoiceList = document.getElementById("invoiceList");
+    invoiceList.innerHTML = "";
+
+    invoices.forEach(invoice => {
+        invoiceList.innerHTML += `
+            <div class="invoice-card">
+                <p><strong>${invoice.invoiceNumber}</strong></p>
+                <p>Status: ${invoice.status}</p>
+                <p>Total: ₹${invoice.totalAmount}</p>
+            </div>
+            <hr>
+        `;
+    });
+}
+
 async function loadInvoices() {
     const response = await fetch(`${BASE_URL}/invoices`, {
         headers: {
@@ -101,31 +133,35 @@ async function loadInvoices() {
 
     const invoices = await response.json();
 
-    const invoiceList = document.getElementById("invoiceList");
-    invoiceList.innerHTML = "";
+    renderInvoices(invoices);   
 
-    invoices.forEach(invoice => {
-        invoiceList.innerHTML += `
-    <div class="invoice-card">
-        <p><strong>${invoice.invoiceNumber}</strong></p>
-        <p>Status: ${invoice.status}</p>
-        <p>Total: ₹${invoice.totalAmount}</p>
+//     const invoices = await response.json();
 
-        <button onclick="downloadPdf(${invoice.id})">
-            Download PDF
-        </button>
+//     const invoiceList = document.getElementById("invoiceList");
+//     invoiceList.innerHTML = "";
 
-        <button onclick="sendInvoiceEmail(${invoice.id})">
-            Send Email
-        </button>
+//     invoices.forEach(invoice => {
+//         invoiceList.innerHTML += `
+//     <div class="invoice-card">
+//         <p><strong>${invoice.invoiceNumber}</strong></p>
+//         <p>Status: ${invoice.status}</p>
+//         <p>Total: ₹${invoice.totalAmount}</p>
 
-        <button onclick="markAsPaid(${invoice.id})">
-            Mark Paid
-        </button>
-    </div>
-    <hr>
-`;
-    });
+//         <button onclick="downloadPdf(${invoice.id})">
+//             Download PDF
+//         </button>
+
+//         <button onclick="sendInvoiceEmail(${invoice.id})">
+//             Send Email
+//         </button>
+
+//         <button onclick="markAsPaid(${invoice.id})">
+//             Mark Paid
+//         </button>
+//     </div>
+//     <hr>
+// `;
+//     });
 }
 
 async function downloadPdf(id) {
@@ -173,6 +209,27 @@ async function markAsPaid(id) {
         alert("Invoice marked as PAID");
         loadInvoices();
     }
+}
+
+async function searchInvoices() {
+    const keyword = document.getElementById("search").value;
+
+    const response = await fetch(
+        `${BASE_URL}/invoices/search?keyword=${keyword}`,
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
+
+    const filteredInvoices = await response.json();
+
+    console.log(filteredInvoices);      
+
+    console.log("Rendering search results...");
+// renderInvoices(filteredInvoices);
+    renderInvoices(filteredInvoices);
 }
 
 window.onload = function () {

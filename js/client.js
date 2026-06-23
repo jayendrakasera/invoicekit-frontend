@@ -28,6 +28,24 @@ async function addClient() {
     }
 }
 
+function renderClients(clients) {
+    const clientList = document.getElementById("clientList");
+
+    clientList.innerHTML = "";
+
+    clients.forEach(client => {
+        clientList.innerHTML += `
+            <div>
+                <p>${client.name}</p>
+                <p>${client.email}</p>
+                <p>${client.phone}</p>
+                <button onclick="deleteClient(${client.id})">Delete</button>
+            </div>
+            <hr>
+        `;
+    });
+}
+
 async function loadClients() {
     const response = await fetch(`${BASE_URL}/clients`, {
         method: "GET",
@@ -37,21 +55,22 @@ async function loadClients() {
     });
 
     const clients = await response.json();
+    renderClients(clients);
 
-    const clientList = document.getElementById("clientList");
-    clientList.innerHTML = "";
+    // const clientList = document.getElementById("clientList");
+    // clientList.innerHTML = "";
 
-    clients.forEach(client => {
-        clientList.innerHTML += `
-            <div class="client-card">
-                <p><strong>${client.name}</strong></p>
-                <p>${client.email}</p>
-                <p>${client.phone}</p>
-                <button onclick="deleteClient(${client.id})">Delete</button>
-            </div>
-            <hr>
-        `;
-    });
+    // clients.forEach(client => {
+    //     clientList.innerHTML += `
+    //         <div class="client-card">
+    //             <p><strong>${client.name}</strong></p>
+    //             <p>${client.email}</p>
+    //             <p>${client.phone}</p>
+    //             <button onclick="deleteClient(${client.id})">Delete</button>
+    //         </div>
+    //         <hr>
+    //     `;
+    // });
 }
 
 async function deleteClient(id) {
@@ -66,6 +85,23 @@ async function deleteClient(id) {
         alert("Client deleted");
         loadClients();
     }
+}
+
+async function searchClients() {
+    const keyword = document.getElementById("searchClient").value;
+
+    const response = await fetch(
+        `${BASE_URL}/clients/search?keyword=${keyword}`,
+        {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
+
+    const clients = await response.json();
+
+    renderClients(clients);
 }
 
 window.onload = loadClients;
