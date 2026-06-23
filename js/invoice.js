@@ -34,18 +34,32 @@ async function loadClients() {
     });
 }
 
+// function addItemField() {
+//     itemCount++;
+
+//     const container = document.getElementById("itemsContainer");
+
+//     container.innerHTML += `
+//         <div class="item-row" id="item-${itemCount}">
+//             <input type="text" id="itemName-${itemCount}" placeholder="Item Name">
+//             <input type="number" id="quantity-${itemCount}" placeholder="Quantity">
+//             <input type="number" id="price-${itemCount}" placeholder="Price">
+//         </div>
+//     `;
+// }
+
 function addItemField() {
     itemCount++;
 
     const container = document.getElementById("itemsContainer");
 
-    container.innerHTML += `
+    container.insertAdjacentHTML("beforeend", `
         <div class="item-row" id="item-${itemCount}">
             <input type="text" id="itemName-${itemCount}" placeholder="Item Name">
             <input type="number" id="quantity-${itemCount}" placeholder="Quantity">
             <input type="number" id="price-${itemCount}" placeholder="Price">
         </div>
-    `;
+    `);
 }
 
 async function createInvoice() {
@@ -143,7 +157,7 @@ if (invoices.length === 0) {
                     Download PDF
                 </button>
 
-                <button class="small-btn" onclick="sendEmail(${invoice.id})">
+                <button class="small-btn" onclick="sendInvoiceEmail(${invoice.id})">
                     Send Email
                 </button>
 

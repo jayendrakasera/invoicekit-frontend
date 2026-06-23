@@ -26,9 +26,8 @@ async function register() {
     return;
 }
 
-const token = await response.text();
-
-localStorage.setItem("token", token);
+const result = await response.json();
+localStorage.setItem("token", result.token);
 
     alert("Registration successful");
     window.location.href = "dashboard.html";
@@ -53,9 +52,8 @@ async function login() {
         return;
     }
 
-    const token = await response.text();
-
-    localStorage.setItem("token", token);
+const result = await response.json();
+localStorage.setItem("token", result.token);
 
     alert("Login successful");
     window.location.href = "dashboard.html";
