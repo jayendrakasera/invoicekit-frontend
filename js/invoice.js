@@ -91,6 +91,7 @@ if (!selectedClient) {
         clientId: parseInt(selectedClient),
         issueDate: document.getElementById("issueDate").value,
         dueDate: document.getElementById("dueDate").value,
+        gstPercentage: document.getElementById("gstPercentage").value,
         notes: document.getElementById("notes").value,
         gstPercentage: 18,
         items: items
@@ -143,6 +144,7 @@ if (invoices.length === 0) {
         invoiceList.innerHTML += `
             <div class="invoice-card">
                 <p><strong>${invoice.invoiceNumber}</strong></p>
+                <p>Client: ${invoice.client.name}</p>
 
                 <p>
                     Status: 
