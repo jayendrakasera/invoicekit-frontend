@@ -42,7 +42,7 @@ function renderClients(clients) {
                 <p>${client.name}</p>
                 <p>${client.email}</p>
                 <p>${client.phone}</p>
-                <button onclick="deleteClient(${client.id})">Delete</button>
+                <button class="small-btn" onclick="deleteClient(${client.id})">Delete</button>
             </div>
             <hr>
         `;

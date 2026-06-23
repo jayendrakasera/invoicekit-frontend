@@ -6,52 +6,84 @@
 </head>
 <body>
 
-<div class="container">
+<div class="layout">
 
-<button onclick="prevInvoicePage()">Previous</button>
-<button onclick="nextInvoicePage()">Next</button>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>InvoiceKit</h2>
 
-<input type="text" id="search" placeholder="Search invoices">
-<button onclick="searchInvoices()">Search</button>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="clients.html">Clients</a>
+        <a href="invoices.html">Invoices</a>
 
-<select id="statusFilter" onchange="filterByStatus()">
-    <option value="">Filter Status</option>
-    <option value="PAID">PAID</option>
-    <option value="PENDING">PENDING</option>
-</select>
+        <button onclick="logout()">Logout</button>
+    </div>
 
-<select id="amountSort" onchange="sortByAmount()">
-    <option value="">Sort Amount</option>
-    <option value="asc">Low to High</option>
-    <option value="desc">High to Low</option>
-</select>
+    <!-- Main Content -->
+    <div class="main-content">
 
-<select id="dateSort" onchange="sortByDate()">
-    <option value="">Sort Date</option>
-    <option value="asc">Oldest First</option>
-    <option value="desc">Newest First</option>
-</select>
+        <h1>Invoice Management</h1>
 
-    <h2>Create Invoice</h2>
+        <!-- Search + Filters -->
+        <input type="text" id="search" placeholder="Search invoices">
+        <button onclick="searchInvoices()">Search</button>
 
-    <select id="clientSelect"></select>
+        <br><br>
 
-    <input type="date" id="issueDate">
-    <input type="date" id="dueDate">
-    <input type="text" id="notes" placeholder="Notes">
+        <select id="statusFilter" onchange="filterByStatus()">
+            <option value="">Filter Status</option>
+            <option value="PAID">PAID</option>
+            <option value="PENDING">PENDING</option>
+        </select>
 
-    <h3>Invoice Items</h3>
+        <select id="amountSort" onchange="sortByAmount()">
+            <option value="">Sort Amount</option>
+            <option value="asc">Low to High</option>
+            <option value="desc">High to Low</option>
+        </select>
 
-    <div id="itemsContainer"></div>
+        <select id="dateSort" onchange="sortByDate()">
+            <option value="">Sort Date</option>
+            <option value="asc">Oldest First</option>
+            <option value="desc">Newest First</option>
+        </select>
 
-    <button onclick="addItemField()">Add Item</button>
-    <button onclick="createInvoice()">Create Invoice</button>
+        <br><br>
 
-    <h3>Invoice List</h3>
-    <div id="invoiceList"></div>
+        <!-- Create Invoice Form -->
+        <div class="invoice-card">
 
-    <br>
-    <a href="dashboard.html">Back to Dashboard</a>
+            <h2>Create Invoice</h2>
+
+            <select id="clientSelect"></select>
+
+            <input type="date" id="issueDate">
+            <input type="date" id="dueDate">
+            <input type="text" id="notes" placeholder="Notes">
+
+            <h3>Invoice Items</h3>
+
+            <div id="itemsContainer"></div>
+
+            <button onclick="addItemField()">Add Item</button>
+            <button onclick="createInvoice()">Create Invoice</button>
+
+        </div>
+
+        <br>
+
+        <!-- Invoice List -->
+        <h2>Invoice List</h2>
+        <div id="invoiceList"></div>
+
+        <br>
+
+        <!-- Pagination -->
+        <button onclick="prevInvoicePage()">Previous</button>
+        <button onclick="nextInvoicePage()">Next</button>
+
+    </div>
+
 </div>
 
 <script src="js/api.js"></script>
