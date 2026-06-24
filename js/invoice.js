@@ -164,6 +164,8 @@ if (invoices.length === 0) {
                 </button>
 
                 <button class="small-btn" onclick="markAsPaid(${invoice.id})">Mark Paid</button>
+
+                <button class="small-btn" onclick="deleteInvoice(${invoice.id})"> Delete </button>
             </div>
             <hr>
         `;
@@ -357,6 +359,29 @@ function prevInvoicePage() {
         invoicePage--;
         loadInvoices();
     }
+}
+
+async function deleteInvoice(id) {
+    const response = await fetch(
+        `${BASE_URL}/invoices/${id}`,
+        {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+    );
+
+    if (!response.ok) {
+        alert("Failed to delete invoice");
+        return;
+    }
+
+    alert("Invoice deleted successfully");
+
+    await loadInvoices();
+
+    // loadInvoices();
 }
 
 window.onload = function () {
