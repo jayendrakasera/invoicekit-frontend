@@ -34,6 +34,12 @@ localStorage.setItem("token", result.token);
 }
 
 async function login() {
+
+     const loginBtn = document.getElementById("loginBtn");
+
+    loginBtn.innerText = "Logging in...";
+    loginBtn.disabled = true;
+
     const data = {
         email: document.getElementById("loginEmail").value,
         password: document.getElementById("loginPassword").value
@@ -47,14 +53,25 @@ async function login() {
         body: JSON.stringify(data)
     });
 
+    // if (!response.ok) {
+    //     alert("Invalid email or password");
+    //     return;
+    // }
     if (!response.ok) {
-        alert("Invalid email or password");
-        return;
-    }
+    alert("Invalid email or password");
+
+    loginBtn.innerText = "Login";
+    loginBtn.disabled = false;
+
+    return;
+}
 
 const result = await response.json();
 localStorage.setItem("token", result.token);
 
     alert("Login successful");
+
+    loginBtn.innerText = "Success...";
+
     window.location.href = "dashboard.html";
 }
