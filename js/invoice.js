@@ -87,15 +87,31 @@ if (!selectedClient) {
         });
     }
 
+    // const data = {
+    //     clientId: parseInt(selectedClient),
+    //     issueDate: document.getElementById("issueDate").value,
+    //     dueDate: document.getElementById("dueDate").value,
+    //     gstPercentage: document.getElementById("gstPercentage").value,
+    //     notes: document.getElementById("notes").value,
+    //     gstPercentage: 18,
+    //     items: items
+    // };
     const data = {
-        clientId: parseInt(selectedClient),
-        issueDate: document.getElementById("issueDate").value,
-        dueDate: document.getElementById("dueDate").value,
-        gstPercentage: document.getElementById("gstPercentage").value,
-        notes: document.getElementById("notes").value,
-        gstPercentage: 18,
-        items: items
-    };
+    clientId: parseInt(selectedClient),
+
+    issueDate:
+        document.getElementById("issueDate").value ||
+        new Date().toISOString().split("T")[0],
+
+    dueDate: document.getElementById("dueDate").value,
+
+    gstPercentage:
+        parseFloat(document.getElementById("gstPercentage").value) || 18,
+
+    notes: document.getElementById("notes").value,
+
+    items: items
+};
 
     console.log(data);
 
