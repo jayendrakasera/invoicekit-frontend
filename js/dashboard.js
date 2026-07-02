@@ -1,3 +1,11 @@
+const urlParams = new URLSearchParams(window.location.search);
+const oauthToken = urlParams.get("token");
+
+if (oauthToken) {
+    localStorage.setItem("token", oauthToken);
+    window.history.replaceState({}, document.title, "dashboard.html");
+}
+
 if (!localStorage.getItem("token")) {
     const params = new URLSearchParams(window.location.search);
     const tokenFromUrl = params.get("token");
