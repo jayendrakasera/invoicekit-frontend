@@ -1,6 +1,18 @@
 if (!localStorage.getItem("token")) {
-    window.location.href = "index.html";
+    const params = new URLSearchParams(window.location.search);
+    const tokenFromUrl = params.get("token");
+
+    if (tokenFromUrl) {
+        localStorage.setItem("token", tokenFromUrl);
+
+        // remove token from URL
+        window.history.replaceState({}, document.title, "/dashboard.html");
+    } else {
+        window.location.href = "index.html";
+    }
 }
+
+const token = localStorage.getItem("token");
 
 const token = localStorage.getItem("token");
 
